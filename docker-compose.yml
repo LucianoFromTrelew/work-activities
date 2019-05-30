@@ -1,0 +1,13 @@
+version: "3"
+services:
+  db:
+    image: mongo
+    container_name: "work-activities-db"
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb
+    env_file:
+      - "db.env"
+volumes:
+  mongodb:
