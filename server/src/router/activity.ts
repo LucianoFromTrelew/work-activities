@@ -4,7 +4,8 @@ import {
   getActivities,
   getActivityById,
   deleteActivity,
-  updateActivity
+  updateActivity,
+  deleteTagFromActivity
 } from "../controllers/activity.controller";
 
 const router = Router();
@@ -14,5 +15,6 @@ router.post("/", createActivity);
 router.get("/:id", getActivityById);
 router.delete("/:id", deleteActivity);
 router.put("/:id", updateActivity);
+router.delete("/:id/tags/:tag", deleteTagFromActivity);
 
 export default router;

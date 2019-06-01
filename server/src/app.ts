@@ -4,7 +4,7 @@ import { connect } from "mongoose";
 import "dotenv/config";
 import morgan = require("morgan");
 import bodyParser from "body-parser";
-import { getDbUri } from "./utils";
+import { getDbUri } from "./config/database";
 
 const getApp = async (): Promise<Application> => {
   const app: Application = express();

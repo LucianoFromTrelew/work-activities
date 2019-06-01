@@ -1,28 +1,61 @@
-import * as mongoose from "mongoose";
-import IActivity from "../interfaces/activity.interface";
+import { Typegoose, prop, instanceMethod, staticMethod } from "typegoose";
+import { isArrayOfStrings } from "../utils";
 
-const activitySchema = new mongoose.Schema({
-  id: Number,
-  title: String,
-  description: String,
-  tags: [String],
+class ActivityClass extends Typegoose {
+  @prop({ required: true, unique: true })
+  id: Number;
+  @prop({ required: true })
+  title: String;
+  @prop({ required: true })
+  description: String;
+  @prop({ required: true, validate: isArrayOfStrings })
+  tags: string[];
+  @prop()
   geolocation: {
-    latitude: Number,
-    longitude: Number
+    latitude: Number;
+    longitude: Number;
+  };
+
+  @instanceMethod
+  filterByKeyword(keywordList: String[]): Boolean {
+    return keywordList.some((keyword: string) =>
+      this.toString().includes(keyword)
+    );
   }
-});
 
-const Activity = mongoose.model<IActivity & mongoose.Document>(
-  "Activity",
-  activitySchema
-);
+  @instanceMethod
+  getTagIndex(tag: String): number {
+    return this.tags.findIndex(savedTag => tag === tag);
+  }
 
-// activitySchema.method("filterByKeyword", function(
-//   keywordList: String[]
-// ): Boolean {
-//   return keywordList.some((keyword: string) =>
-//     this.toString().includes(keyword)
-//   );
-// });
+  @instanceMethod
+  hasTag(tagToDelete: String): Boolean {
+    return this.getTagIndex(tagToDelete) !== -1;
+  }
+
+  @instanceMethod
+  removeTag(tagToDelete: String): void {
+    // this.tags.splice(this.getTagIndex(tag), 1);
+    this.tags = this.tags.filter(tag => tag !== tagToDelete);
+  }
+
+  @staticMethod
+  static async getTags() {
+    const tags = (await Activity.find({}, "tags")).map(
+      activity => activity.tags
+    );
+    const flattenTags = [].concat(...tags);
+    const onlyUniqueTags = new Set(flattenTags);
+    return Array.from(onlyUniqueTags);
+  }
+
+  @staticMethod
+  static async getActivitiesForTag(tag: String) {
+    const activities = await Activity.find({ tags: tag });
+    return activities;
+  }
+}
+
+const Activity = new ActivityClass().getModelForClass(ActivityClass);
 
 export default Activity;
