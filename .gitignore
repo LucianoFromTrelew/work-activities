@@ -33,6 +33,11 @@
 .nfs*
 
 ### Node ###
+
+# dist
+dist/
+
+
 # Logs
 logs
 *.log
@@ -105,9 +110,6 @@ typings/
 
 # nuxt.js build output
 .nuxt
-
-# vuepress build output
-.vuepress/dist
 
 # Serverless directories
 .serverless/
