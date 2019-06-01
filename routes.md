@@ -10,14 +10,14 @@
   - Elimina actividad
 - PUT /api/activity/{id} => 200, `{ title, description, tags[], geolocation{} }` => 200, <Activity>
   - Actualiza actividad
-- DELETE /api/activity/{id}/tags/{id} => 204
+- DELETE /api/activity/{id}/tags/{tag} => 204
   - Elimina una etiqueta de una actividad
 
 ## Tags
 
-- GET /api/tag => 200, <Tag>[]
+- GET /api/tag => 200, String[]
   - Devuelve lista de etiquetas
-- GET /api/tag/{id} => 200, `{ tag: { id: ..., title: ... }, activities: [{...}, {...}] }`
+- GET /api/tag/{tag} => 200, `{ tag: "...", activities: [{...}, {...}] }`
   - Devuelve una etiqueta y las actividades que tienen esa etiqueta
-- DELETE /api/tag/{id}[?cascade] => 204
+- DELETE /api/tag/{tag}[?cascade] => 204
   - Elimina una etiqueta. Permite eliminar todas las actividades que contengan esa etiqueta
