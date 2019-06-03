@@ -3,7 +3,7 @@ import { hashPassword } from "../utils";
 import { generate } from "randomstring";
 
 @pre<UserClass>("save", function(next) {
-  if (this._id) next();
+  if (!this.isNew) return next();
   this.password = hashPassword(this.password);
   next();
 })
