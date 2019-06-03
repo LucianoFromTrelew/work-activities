@@ -39,6 +39,7 @@ const createActivity = async (
 ) => {
   try {
     const activityData: any = request.body;
+    // TODO: refactor this to a pre-save hook
     activityData.id = (await Activity.countDocuments()) + 1;
     const createdActivity = new Activity(activityData);
     const savedPost = await createdActivity.save();

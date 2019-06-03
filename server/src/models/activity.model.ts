@@ -35,7 +35,6 @@ class ActivityClass extends Typegoose {
 
   @instanceMethod
   removeTag(tagToDelete: String): void {
-    // this.tags.splice(this.getTagIndex(tag), 1);
     this.tags = this.tags.filter(tag => tag !== tagToDelete);
   }
 

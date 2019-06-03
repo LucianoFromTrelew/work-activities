@@ -1,5 +1,5 @@
 import express, { Application, Request, Response, NextFunction } from "express";
-import { ActivityRoutes, TagRoutes } from "./router";
+import { ActivityRoutes, TagRoutes, AuthRoutes } from "./router";
 import { connect } from "mongoose";
 import "dotenv/config";
 import morgan = require("morgan");
@@ -21,6 +21,7 @@ const getApp = async (): Promise<Application> => {
   // Routers
   app.use("/api/activity", ActivityRoutes);
   app.use("/api/tag", TagRoutes);
+  app.use("/auth", AuthRoutes);
 
   // Conectarse a la BD
   try {
