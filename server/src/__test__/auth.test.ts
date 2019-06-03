@@ -2,6 +2,7 @@ import request from "supertest";
 import faker from "faker";
 import getApp from "../app";
 import { Application } from "express";
+import User from "../models/user.model";
 
 describe("auth", () => {
   let app: Application;
@@ -21,40 +22,52 @@ describe("auth", () => {
   });
 
   describe("login", () => {
-    let user;
+    let user: any;
+    const username = "testuser";
+    const password = "testpassword";
     beforeEach(async () => {
-      // TODO: Create user
+      user = new User({
+        username,
+        password
+      });
+      await user.save();
     });
 
     afterEach(async () => {
-      // TODO: Delete users
+      await User.deleteMany({});
     });
 
     it("logs in correctly", async () => {
-      const { username, password } = user;
       const response = await request(app)
         .post("/auth/login")
         .send({ username, password });
+      const updatedUser = await User.findOne({ username });
       expect(response.status).toBe(200);
-      expect(response.body).toHaveProperty("apiToken");
+      expect(response.body).toHaveProperty("apiToken", updatedUser.apiToken);
     });
 
     it("returns 400 if wrong username", async () => {
-      const username = "non-existing-username";
-      const { password } = user;
+      const wrongUsername = "non-existing-username";
       const response = await request(app)
         .post("/auth/login")
-        .send({ username, password });
+        .send({ wrongUsername, password });
       expect(response.status).toBe(400);
       expect(response.body).not.toHaveProperty("apiToken");
     });
 
     it("returns 400 if wrong password", async () => {
-      const password = "wrong-password";
-      const { username } = user;
+      const wrongPassword = "wrong-password";
       const response = await request(app)
         .post("/auth/login")
-        .send({ username, password });
+        .send({ username, wrongPassword });
+      expect(response.status).toBe(400);
+      expect(response.body).not.toHaveProperty("apiToken");
+    });
+
+    it("returns 400 if missing data", async () => {
+      const response = await request(app)
+        .post("/auth/login")
+        .send({ username });
       expect(response.status).toBe(400);
       expect(response.body).not.toHaveProperty("apiToken");
     });
