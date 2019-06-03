@@ -3,6 +3,7 @@ import { hashPassword } from "../utils";
 import { generate } from "randomstring";
 
 @pre<UserClass>("save", function(next) {
+  if (this._id) next();
   this.password = hashPassword(this.password);
   next();
 })
@@ -18,6 +19,17 @@ class UserClass extends Typegoose {
   generateApiToken(): string {
     this.apiToken = generate();
     return this.apiToken;
+  }
+
+  @instanceMethod
+  clearApiToken(): void {
+    this.apiToken = "";
+  }
+
+  @instanceMethod
+  getAuthHeader(): string {
+    if (this.apiToken) return `Bearer ${this.apiToken}`;
+    return "";
   }
 
   @staticMethod
