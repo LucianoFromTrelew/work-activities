@@ -13,7 +13,7 @@ const login = async (
     await user.save();
     response.status(200).send({ apiToken });
   } catch (err) {
-    response.status(400).send({ msg: "Bad request" });
+    response.status(400).send({ msg: "Datos incorrectos" });
   }
 };
 
@@ -30,7 +30,7 @@ const logout = async (
     await user.save();
     response.status(200).send();
   } catch (err) {
-    response.status(400).send({ msg: "Bad request" });
+    response.status(400).send({ msg: "Datos incorrectos" });
   }
 };
 
@@ -43,4 +43,20 @@ const isAuthenticated = async (
   response.status(200).send({ username, apiToken });
 };
 
-export { login, logout, isAuthenticated };
+const signup = async (
+  request: Request,
+  response: Response,
+  next: NextFunction
+) => {
+  const { username, password } = request.body;
+  try {
+    const user = new User({ username, password });
+    user.generateApiToken();
+    await user.save();
+    response.status(200).send({ username, apiToken: user.apiToken });
+  } catch (error) {
+    response.status(400).send({ msg: "No se pudo crear el usuario" });
+  }
+};
+
+export { login, logout, isAuthenticated, signup };
