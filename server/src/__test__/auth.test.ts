@@ -21,10 +21,11 @@ describe("auth", () => {
     expect(1).toBe(1);
   });
 
-  describe("login", () => {
+  describe("login endpoint", () => {
     let user: any;
     const username = "testuser";
     const password = "testpassword";
+
     beforeEach(async () => {
       user = new User({
         username,
@@ -70,6 +71,83 @@ describe("auth", () => {
         .send({ username });
       expect(response.status).toBe(400);
       expect(response.body).not.toHaveProperty("apiToken");
+    });
+  });
+
+  describe("logout endpoint", () => {
+    let user: any;
+    const username = "testuser";
+    const password = "testpassword";
+
+    beforeEach(async () => {
+      user = new User({
+        username,
+        password
+      });
+      user.generateApiToken();
+      await user.save();
+    });
+
+    afterEach(async () => {
+      await User.deleteMany({});
+    });
+
+    it("logs out correctly", async () => {
+      const response = await request(app)
+        .post("/auth/logout")
+        .set("Authorization", user.getAuthHeader());
+      expect(response.status).toBe(200);
+    });
+
+    it("returns 400 if user not logged in", async () => {
+      user.clearApiToken();
+      await user.save();
+      const response = await request(app)
+        .post("/auth/logout")
+        .set("Authorization", user.getAuthHeader());
+      expect(response.status).toBe(400);
+    });
+  });
+
+  describe("is authenticated endpoint", () => {
+    let user: any;
+    const username = "testuser";
+    const password = "testpassword";
+
+    beforeEach(async () => {
+      user = new User({
+        username,
+        password
+      });
+      user.generateApiToken();
+      await user.save();
+    });
+
+    afterEach(async () => {
+      await User.deleteMany({});
+    });
+
+    it("returns 200 if user is authenticated", async () => {
+      const response = await request(app)
+        .get("/auth/isauthenticated")
+        .set("Authorization", user.getAuthHeader());
+      expect(response.status).toBe(200);
+      expect(response.body).toHaveProperty("username", user.username);
+      expect(response.body).toHaveProperty("apiToken", user.apiToken);
+    });
+
+    it("return 401 if user is not authenticated", async () => {
+      user.clearApiToken();
+      await user.save();
+      const response = await request(app)
+        .get("/auth/isauthenticated")
+        .set("Authorization", user.getAuthHeader());
+      expect(response.status).toBe(401);
+    });
+
+    it("return 401 if Authorization header is not present", async () => {
+      const response = await request(app).get("/auth/isauthenticated");
+      expect(response.status).toBe(401);
     });
   });
 });
