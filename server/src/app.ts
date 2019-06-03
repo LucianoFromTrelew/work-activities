@@ -2,16 +2,21 @@ import express, { Application, Request, Response, NextFunction } from "express";
 import { ActivityRoutes, TagRoutes, AuthRoutes } from "./router";
 import { connect } from "mongoose";
 import "dotenv/config";
-import morgan = require("morgan");
+import morgan from "morgan";
 import bodyParser from "body-parser";
 import { getDbUri } from "./config/database";
+import passport from "./config/passport";
 
 const getApp = async (): Promise<Application> => {
   const app: Application = express();
 
-  app.get("/", (request: Request, response: Response, next: NextFunction) => {
-    response.send("Hello world!");
-  });
+  app.get(
+    "/",
+    passport.authenticate("bearer", { session: false }),
+    (request: Request, response: Response, next: NextFunction) => {
+      response.send("Hello world!");
+    }
+  );
 
   // Logger
   if (process.env.NODE_ENV !== "test") app.use(morgan("combined"));
