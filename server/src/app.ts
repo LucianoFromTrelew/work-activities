@@ -6,18 +6,13 @@ import morgan from "morgan";
 import bodyParser from "body-parser";
 import { getDbUri } from "./config/database";
 import passport from "./config/passport";
+import cors from "cors";
 
 const getApp = async (): Promise<Application> => {
   const app: Application = express();
 
-  app.get(
-    "/",
-    passport.authenticate("bearer", { session: false }),
-    (request: Request, response: Response, next: NextFunction) => {
-      response.send("Hello world!");
-    }
-  );
-
+  // CORS
+  app.use(cors());
   // Logger
   if (process.env.NODE_ENV !== "test") app.use(morgan("combined"));
   // Body parser
@@ -27,6 +22,13 @@ const getApp = async (): Promise<Application> => {
   app.use("/api/activity", ActivityRoutes);
   app.use("/api/tag", TagRoutes);
   app.use("/auth", AuthRoutes);
+  app.get(
+    "/",
+    passport.authenticate("bearer", { session: false }),
+    (request: Request, response: Response, next: NextFunction) => {
+      response.send("Hello world!");
+    }
+  );
 
   // Conectarse a la BD
   try {
