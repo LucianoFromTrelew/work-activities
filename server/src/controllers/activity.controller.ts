@@ -22,14 +22,17 @@ const getActivityById = async (
   response: Response,
   next: NextFunction
 ) => {
-  const id = parseInt(request.params.id);
-  const activity = await Activity.findOne({ id });
-  if (!activity) {
-    response.status(404);
-    response.send({ msg: "Actividad no encontrada" });
-    return;
+  try {
+    const id = parseInt(request.params.id);
+    const activity = await Activity.findOne({ id });
+    if (!activity) {
+      response.status(404).send({ msg: "Actividad no encontrada" });
+      return;
+    }
+    response.send(activity);
+  } catch (err) {
+    response.status(400).send({ msg: "Bad request" });
   }
-  response.send(activity);
 };
 
 const createActivity = async (

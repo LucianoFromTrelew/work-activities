@@ -156,6 +156,12 @@ describe("activity", () => {
     expect(response.body).toMatchObject({ msg: "Actividad no encontrada" });
   });
 
+  it("returns 400 if id is non-numeric", async () => {
+    const id = "something";
+    const response = await request(app).get(`/api/activity/${id}`);
+    expect(response.status).toBe(400);
+  });
+
   describe("create endpoint", () => {
     let data: any;
     let id: Number;
