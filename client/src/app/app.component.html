@@ -1,6 +1,8 @@
 <app-header [title]="'Work activities'"></app-header>
 <section fxLayout="row" fxLayoutAlign="space-evenly center">
-  <div class="mat-display-1">Welcome to {{ title }}!</div>
+  <div class="mat-display-1" data-testid="welcome-title">
+    Welcome to {{ title }}!
+  </div>
 </section>
 
 <router-outlet></router-outlet>
