@@ -1,19 +1,13 @@
-import { TestBed } from "@angular/core/testing";
-
 import { ActivitiesService } from "./activities.service";
-import { HttpClient } from "@angular/common/http";
-import { defer } from "rxjs";
-
-function asyncData<T>(data: T) {
-  return defer(() => Promise.resolve(data));
-}
+import { asyncData } from "./utils/testing";
 
 describe("ActivitiesService", () => {
-  let httpClientStub: { get: jasmine.Spy };
+  let httpClientStub: { get: any };
   let service: ActivitiesService;
 
   beforeEach(() => {
-    httpClientStub = jasmine.createSpyObj("HttpClient", ["get"]);
+    const get = jasmine.createSpyObj("get", ["toPromise"]);
+    httpClientStub.get = get;
     service = new ActivitiesService(httpClientStub as any);
   });
 
@@ -26,11 +20,11 @@ describe("ActivitiesService", () => {
       { id: 1, name: "coso" },
       { id: 2, name: "otro" }
     ];
-    httpClientStub.get.and.returnValue(asyncData(expectedData));
-    service.getActivities().subscribe(data => {
+    httpClientStub.get.toPromise.and.returnValue(asyncData(expectedData));
+    service.getActivities().then(data => {
       expect(data).toEqual(expectedData, "expected data"), fail;
     });
 
-    expect(httpClientStub.get.calls.count()).toBe(1, "one call");
+    expect(httpClientStub.get.toPromise.calls.count()).toBe(1, "one call");
   });
 });
