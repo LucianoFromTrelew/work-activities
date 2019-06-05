@@ -10,9 +10,9 @@ export class ActivityDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    console.log("Hey there");
-    this.route.paramMap.subscribe(param => {
-      console.log(param);
-    });
+    // console.log("Hey there");
+    // this.route.paramMap.subscribe(param => {
+    //   console.log(param);
+    // });
   }
 }

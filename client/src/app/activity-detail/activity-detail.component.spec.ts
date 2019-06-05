@@ -1,16 +1,21 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ActivityDetailComponent } from './activity-detail.component';
+import { ActivityDetailComponent } from "./activity-detail.component";
+import { ActivatedRoute } from "@angular/router";
 
-describe('ActivityDetailComponent', () => {
+let activatedRouteStub: Partial<ActivatedRoute>;
+
+activatedRouteStub = {};
+
+describe("ActivityDetailComponent", () => {
   let component: ActivityDetailComponent;
   let fixture: ComponentFixture<ActivityDetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ActivityDetailComponent ]
-    })
-    .compileComponents();
+      declarations: [ActivityDetailComponent],
+      providers: [{ provide: ActivatedRoute, useValue: activatedRouteStub }]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +24,7 @@ describe('ActivityDetailComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
