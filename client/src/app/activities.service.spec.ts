@@ -3,8 +3,9 @@ import {
   HttpClientTestingModule,
   HttpTestingController
 } from "@angular/common/http/testing";
-import { fakeAsync, flush, tick, TestBed, inject } from "@angular/core/testing";
+import { fakeAsync, TestBed, tick } from "@angular/core/testing";
 import { HttpClient } from "@angular/common/http";
+import { Activity } from "./models/activity";
 
 const expectedData = [
   {
@@ -84,7 +85,9 @@ describe("ActivitiesService 2", () => {
     spy.get = jasmine.createSpy().and.returnValue({
       toPromise: jasmine
         .createSpy()
-        .and.returnValue(new Promise(resolve => resolve(expectedData)))
+        .and.returnValue(
+          new Promise<Activity[]>(resolve => resolve(expectedData))
+        )
     });
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
@@ -95,14 +98,12 @@ describe("ActivitiesService 2", () => {
   });
 
   it("should only be making one http request on getActivities", fakeAsync(() => {
-    service
-      .getActivities()
-      .then(_ => {
-        return service.getActivities();
-      })
-      .then(_ => {});
-
+    expect(spy.get.calls.count()).toBe(0);
+    service.getActivities();
     tick();
-    expect(spy.get.calls.count()).toBeLessThan(2);
+    service.getActivities();
+    tick();
+
+    expect(spy.get.calls.count()).toBe(1);
   }));
 });
