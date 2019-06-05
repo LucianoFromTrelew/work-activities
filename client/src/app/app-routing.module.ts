@@ -4,8 +4,8 @@ import { ActivityListPageComponent } from "./pages/activity-list-page/activity-l
 import { ActivityDetailPageComponent } from "./pages/activity-detail-page/activity-detail-page.component";
 
 const routes: Routes = [
-  { path: "activity", component: ActivityListPageComponent },
   { path: "", redirectTo: "/activity", pathMatch: "full" },
+  { path: "activity", component: ActivityListPageComponent },
   { path: "activity/:activityId", component: ActivityDetailPageComponent },
   { path: "**", redirectTo: "/activity" }
 ];
