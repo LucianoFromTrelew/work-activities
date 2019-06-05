@@ -9,15 +9,19 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppHeaderComponent } from "./layout/app-header/app-header.component";
-import { ActivityListComponent } from "./activity-list/activity-list.component";
-import { ActivityDetailComponent } from "./activity-detail/activity-detail.component";
+import { ActivityListPageComponent } from "./pages/activity-list-page/activity-list-page.component";
+import { ActivityDetailPageComponent } from "./pages/activity-detail-page/activity-detail-page.component";
+import { ActivityCardComponent } from "./components/activity-card/activity-card.component";
+import { ActivityListComponent } from "./components/activity-list/activity-list.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     AppHeaderComponent,
-    ActivityListComponent,
-    ActivityDetailComponent
+    ActivityListPageComponent,
+    ActivityDetailPageComponent,
+    ActivityCardComponent,
+    ActivityListComponent
   ],
   imports: [
     BrowserModule,
