@@ -1,12 +1,12 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { ActivityListComponent } from "./activity-list/activity-list.component";
-import { ActivityDetailComponent } from "./activity-detail/activity-detail.component";
+import { ActivityListPageComponent } from "./pages/activity-list-page/activity-list-page.component";
+import { ActivityDetailPageComponent } from "./pages/activity-detail-page/activity-detail-page.component";
 
 const routes: Routes = [
-  { path: "activity", component: ActivityListComponent },
+  { path: "activity", component: ActivityListPageComponent },
   { path: "", redirectTo: "/activity", pathMatch: "full" },
-  { path: "activity/:activityId", component: ActivityDetailComponent },
+  { path: "activity/:activityId", component: ActivityDetailPageComponent },
   { path: "**", redirectTo: "/activity" }
 ];
 
