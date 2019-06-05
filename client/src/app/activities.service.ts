@@ -10,7 +10,10 @@ export class ActivitiesService {
   constructor(private http: HttpClient) {}
 
   private activities: Activity[] = [];
+
   getActivities(): Promise<Activity[]> {
+    if (this.activities.length > 0)
+      return new Promise(resolve => this.activities);
     return this.http
       .get(`${environment.baseUrl}/api/activity`)
       .toPromise()
