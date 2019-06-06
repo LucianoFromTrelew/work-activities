@@ -1,3 +1,9 @@
-<p>
-  activity-list works!
-</p>
+<div fxLayout="row wrap" fxLayoutAlign="space-evenly">
+  <app-activity-card
+    #activityCard
+    class="activity-card"
+    *ngFor="let activity of activities"
+    [activity]="activity"
+    (selected)="onSelectedActivity($event)"
+  ></app-activity-card>
+</div>
