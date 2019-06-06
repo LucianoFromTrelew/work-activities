@@ -1,3 +1,14 @@
-<p>
-  activity-list-page works!
-</p>
+<div *ngIf="!hasActivities()">
+  <mat-spinner *ngIf="!hasActivities()" data-testid="spinner"></mat-spinner>
+</div>
+
+<div *ngIf="error">
+  <h1>Ha ocurrido un error, intente de nuevo más tarde</h1>
+</div>
+
+<div *ngIf="hasActivities()">
+  <app-activity-list
+    [activities]="activities"
+    (selected)="onSelectedActivity($event)"
+  ></app-activity-list>
+</div>
