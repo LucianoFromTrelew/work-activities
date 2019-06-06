@@ -3,7 +3,13 @@ import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { FlexLayoutModule } from "@angular/flex-layout";
 // angular-material imports
-import { MatToolbarModule } from "@angular/material";
+import {
+  MatToolbarModule,
+  MatProgressSpinnerModule,
+  MatCardModule,
+  MatChipsModule,
+  MatButtonModule
+} from "@angular/material";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -29,6 +35,11 @@ import { ActivityListComponent } from "./components/activity-list/activity-list.
     BrowserAnimationsModule,
     FlexLayoutModule,
     HttpClientModule,
+    // angular-material imports
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatChipsModule,
+    MatButtonModule,
     MatToolbarModule
   ],
   providers: [],
