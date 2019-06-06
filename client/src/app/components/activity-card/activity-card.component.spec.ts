@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { ActivityCardComponent } from "./activity-card.component";
 import { MatCardModule, MatChipsModule } from "@angular/material";
-import { getFakeActivities } from "src/app/pages/utils/testing";
+import { getFakeActivities } from "src/app/utils/testing";
 import { Activity } from "src/app/models/activity";
 import { By } from "@angular/platform-browser";
 import { DebugElement } from "@angular/core";
