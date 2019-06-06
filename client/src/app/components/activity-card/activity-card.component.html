@@ -1,3 +1,25 @@
-<p>
-  activity-card works!
-</p>
+<mat-card data-testid="activity-card" (click)="onCardClick()">
+  <mat-card-header>
+    <mat-card-title>
+      <h2>{{ activity.title }}</h2>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <mat-chip-list>
+        <mat-chip *ngFor="let tag of activity.tags">{{ tag }}</mat-chip>
+      </mat-chip-list>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ activity.description }}</p>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button
+      mat-raised-button
+      color="warn"
+      data-testid="delete-btn"
+      (click)="onDeleteClick()"
+    >
+      Eliminar
+    </button>
+  </mat-card-actions>
+</mat-card>
