@@ -60,6 +60,13 @@ describe("ActivityCardComponent", () => {
     expect(expectedActivity).toEqual(fakeActivity);
   });
 
+  it("should not emit 'selected' event when clicking the delete button", () => {
+    let expectedActivity: Activity;
+    component.selected.subscribe(activity => (expectedActivity = activity));
+    deleteBtnDe.triggerEventHandler("click", null);
+    expect(expectedActivity).not.toEqual(fakeActivity);
+  });
+
   it("should call 'onDeleteClick' when click the delete button", () => {
     const onDeleteClickSpy = jasmine.createSpy("onDeleteClickSpy");
     component.onDeleteClick = onDeleteClickSpy;
