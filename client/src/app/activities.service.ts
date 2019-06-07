@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpResponse } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { Activity } from "./models/activity";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
@@ -9,29 +10,28 @@ import { Activity } from "./models/activity";
 export class ActivitiesService {
   constructor(private http: HttpClient) {}
 
-  private activities: Activity[] = [];
-
-  getActivities(): Promise<Activity[]> {
-    if (this.activities.length > 0)
-      return new Promise(resolve => this.activities);
-    return this.http
-      .get(`${environment.baseUrl}/api/activity`)
-      .toPromise()
-      .then((activities: Activity[]) => {
-        this.activities = activities;
-        return activities;
-      }) as Promise<Activity[]>;
+  getUrl(id?: number): string {
+    if (id) return `${environment.baseUrl}/api/activity/${id}`;
+    return `${environment.baseUrl}/api/activity`;
   }
 
-  getActivityById(id: number): Promise<Activity> {
-    const activity = this.activities.find(
-      activityToFind => activityToFind.id === id
-    );
-    if (activity) {
-      return new Promise(resolve => resolve(activity));
-    }
-    return this.http
-      .get(`${environment.baseUrl}/api/activity/${id}`)
-      .toPromise() as Promise<Activity>;
+  getActivities(): Observable<Activity[]> {
+    return this.http.get<Activity[]>(this.getUrl());
+  }
+
+  getActivityById(id: number): Observable<Activity> {
+    return this.http.get<Activity>(this.getUrl(id));
+  }
+
+  createActivity(newActivity: Activity) {
+    return this.http.post(this.getUrl(), newActivity);
+  }
+
+  updateActivity(activityToUpdate: Activity) {
+    return this.http.put(this.getUrl(activityToUpdate.id), activityToUpdate);
+  }
+
+  deleteActivity(activityToDelete: Activity) {
+    return this.http.delete(this.getUrl(activityToDelete.id));
   }
 }
