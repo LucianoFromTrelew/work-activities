@@ -30,7 +30,7 @@ export class LoginPageComponent implements OnInit {
         .toPromise();
       this.router.navigate(["/"]);
     } catch (error) {
-      this.alert.error("Ha ocurrido un error");
+      this.alert.error("Usuario o contraseña incorrectos");
     } finally {
       this.submitted = false;
       this.username.reset();
