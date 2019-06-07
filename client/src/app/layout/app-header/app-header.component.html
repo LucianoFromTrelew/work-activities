@@ -1,5 +1,9 @@
-<mat-toolbar color="primary"
-  ><span data-testid="toolbar-title"
-    ><a routerLink="/">{{ title }}</a></span
-  ></mat-toolbar
+<mat-toolbar
+  color="primary"
+  fxLayout="row"
+  fxLayoutAlign="space-between center"
 >
+  <a routerLink="/" data-testid="toolbar-title">{{ title }}</a>
+  <a *ngIf="!isLoggedIn" routerLink="/login">Ingresar</a>
+  <a *ngIf="isLoggedIn" href="#" (click)="onClickLogout($event)">Salir</a>
+</mat-toolbar>

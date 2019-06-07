@@ -1,4 +1,8 @@
-<app-header [title]="'Work activities'"></app-header>
+<app-header
+  [title]="'Work activities'"
+  [isLoggedIn]="isLoggedIn"
+  (logout)="onLogout()"
+></app-header>
 <section fxLayout="row" fxLayoutAlign="space-evenly center">
   <div class="mat-display-1" data-testid="welcome-title">
     Welcome to {{ title }}!

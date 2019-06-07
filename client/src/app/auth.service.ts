@@ -76,7 +76,7 @@ export class AuthService {
       );
   }
 
-  isLoggedIn(): Observable<Object> {
+  checkIsLoggedIn(): Observable<Object> {
     return this.http
       .get(this.getUrl("isauthenticated"), {
         headers: { Authorization: this.getAuthHeader() }

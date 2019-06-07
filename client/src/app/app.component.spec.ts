@@ -3,11 +3,12 @@ import { RouterTestingModule } from "@angular/router/testing";
 import { AppComponent } from "./app.component";
 import { AppHeaderComponent } from "./layout/app-header/app-header.component";
 import { MatToolbarModule } from "@angular/material";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 
 describe("AppComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, MatToolbarModule],
+      imports: [HttpClientTestingModule, RouterTestingModule, MatToolbarModule],
       declarations: [AppComponent, AppHeaderComponent]
     }).compileComponents();
   }));
