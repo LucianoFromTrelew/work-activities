@@ -23,7 +23,12 @@ export class ActivitiesService {
     return this.http.get<Activity>(this.getUrl(id));
   }
 
-  createActivity(newActivity: Activity) {
+  createActivity(newActivity: {
+    title: string;
+    description: string;
+    tags: string[];
+    geolocation?: { latitude: number; longitude: number };
+  }) {
     return this.http.post(this.getUrl(), newActivity);
   }
 
