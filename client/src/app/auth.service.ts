@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable, of, Subject } from "rxjs";
+import { Observable, of, Subject, BehaviorSubject } from "rxjs";
 import { tap, catchError, finalize } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 
@@ -9,7 +9,9 @@ import { environment } from "src/environments/environment";
 })
 export class AuthService {
   constructor(private http: HttpClient) {}
-  private _authStatus: Subject<boolean> = new Subject<boolean>();
+  private _authStatus: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
+  );
 
   private getLocalStorageKey(): string {
     return "work-activities-api-token";

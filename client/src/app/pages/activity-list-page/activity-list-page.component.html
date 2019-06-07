@@ -1,14 +1,22 @@
-<div *ngIf="!hasActivities()" fxLayout="row" fxLayoutAlign="center">
-  <mat-spinner data-testid="spinner"></mat-spinner>
-</div>
+<div class="container">
+  <div *ngIf="!hasActivities()" fxLayout="row" fxLayoutAlign="center">
+    <mat-spinner data-testid="spinner"></mat-spinner>
+  </div>
 
-<div *ngIf="error" fxLayout="row" fxLayoutAlign="center">
-  <h1>Ha ocurrido un error, intente de nuevo más tarde</h1>
-</div>
+  <div *ngIf="error" fxLayout="row" fxLayoutAlign="center">
+    <h1>Ha ocurrido un error, intente de nuevo más tarde</h1>
+  </div>
 
-<div *ngIf="hasActivities()">
-  <app-activity-list
-    [activities]="activities"
-    (selected)="onSelectedActivity($event)"
-  ></app-activity-list>
+  <div *ngIf="hasActivities()">
+    <app-activity-list
+      [activities]="activities"
+      (selected)="onSelectedActivity($event)"
+    ></app-activity-list>
+  </div>
+
+  <div *ngIf="isLoggedIn" fxLayout="row" fxLayoutAlign="end">
+    <button mat-raised-button color="accent" (click)="onClickCreateActivity()">
+      Crear nueva actividad
+    </button>
+  </div>
 </div>

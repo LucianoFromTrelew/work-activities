@@ -1,18 +1,20 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { AuthService } from "./auth.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title = "client";
+  private subscription: Subscription;
   private isLoggedIn: boolean = false;
   constructor(private authService: AuthService) {}
 
   async ngOnInit() {
-    this.authService.getAuthStatus().subscribe(value => {
+    this.subscription = this.authService.getAuthStatus().subscribe(value => {
       this.isLoggedIn = value;
     });
     try {
@@ -20,6 +22,10 @@ export class AppComponent implements OnInit {
     } catch (error) {
       console.error("pinchose ngOnInit");
     }
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   async onLogout() {
