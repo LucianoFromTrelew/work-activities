@@ -19,7 +19,9 @@ export class ActivityListPageComponent implements OnInit {
 
   async ngOnInit() {
     try {
-      this.activities = await this.activitiesService.getActivities();
+      this.activities = await this.activitiesService
+        .getActivities()
+        .toPromise();
     } catch (error) {
       this.error = true;
     } finally {

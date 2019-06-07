@@ -18,6 +18,7 @@ import { ActivitiesService } from "src/app/activities.service";
 import { ActivityCardComponent } from "src/app/components/activity-card/activity-card.component";
 import { getFakeActivities } from "../../utils/testing";
 import { RouterTestingModule } from "@angular/router/testing";
+import { of } from "rxjs";
 
 describe("ActivityListPageComponent", () => {
   const data = getFakeActivities(3);
@@ -28,9 +29,7 @@ describe("ActivityListPageComponent", () => {
     const activitiesServiceMock = jasmine.createSpyObj("ActivitiesService", [
       "getActivities"
     ]);
-    activitiesServiceMock.getActivities.and.returnValue(
-      new Promise(resolve => resolve(data))
-    );
+    activitiesServiceMock.getActivities.and.returnValue(of(data));
     TestBed.configureTestingModule({
       declarations: [
         ActivityListPageComponent,
