@@ -9,7 +9,10 @@ import {
   MatCardModule,
   MatChipsModule,
   MatButtonModule,
-  MatDividerModule
+  MatDividerModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSnackBarModule
 } from "@angular/material";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -20,7 +23,8 @@ import { ActivityListPageComponent } from "./pages/activity-list-page/activity-l
 import { ActivityDetailPageComponent } from "./pages/activity-detail-page/activity-detail-page.component";
 import { ActivityCardComponent } from "./components/activity-card/activity-card.component";
 import { ActivityListComponent } from "./components/activity-list/activity-list.component";
-import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { LoginPageComponent } from "./pages/login-page/login-page.component";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -38,12 +42,16 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
     BrowserAnimationsModule,
     FlexLayoutModule,
     HttpClientModule,
+    ReactiveFormsModule,
     // angular-material imports
     MatProgressSpinnerModule,
     MatCardModule,
     MatChipsModule,
     MatButtonModule,
     MatDividerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSnackBarModule,
     MatToolbarModule
   ],
   providers: [],
