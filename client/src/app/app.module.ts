@@ -29,6 +29,7 @@ import { LoginPageComponent } from "./pages/login-page/login-page.component";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { ActivityCreatePageComponent } from "./pages/activity-create-page/activity-create-page.component";
 import { DeleteActivityDialogComponent } from "./components/delete-activity-dialog/delete-activity-dialog.component";
+import { ActivityEditPageComponent } from './pages/activity-edit-page/activity-edit-page.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { DeleteActivityDialogComponent } from "./components/delete-activity-dial
     ActivityListComponent,
     LoginPageComponent,
     ActivityCreatePageComponent,
-    DeleteActivityDialogComponent
+    DeleteActivityDialogComponent,
+    ActivityEditPageComponent
   ],
   entryComponents: [DeleteActivityDialogComponent],
   imports: [
