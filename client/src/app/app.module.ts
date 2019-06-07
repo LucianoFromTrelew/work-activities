@@ -20,6 +20,7 @@ import { ActivityListPageComponent } from "./pages/activity-list-page/activity-l
 import { ActivityDetailPageComponent } from "./pages/activity-detail-page/activity-detail-page.component";
 import { ActivityCardComponent } from "./components/activity-card/activity-card.component";
 import { ActivityListComponent } from "./components/activity-list/activity-list.component";
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ActivityListComponent } from "./components/activity-list/activity-list.
     ActivityListPageComponent,
     ActivityDetailPageComponent,
     ActivityCardComponent,
-    ActivityListComponent
+    ActivityListComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
