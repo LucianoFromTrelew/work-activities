@@ -8,7 +8,8 @@ import {
   MatProgressSpinnerModule,
   MatCardModule,
   MatChipsModule,
-  MatButtonModule
+  MatButtonModule,
+  MatDividerModule
 } from "@angular/material";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -40,6 +41,7 @@ import { ActivityListComponent } from "./components/activity-list/activity-list.
     MatCardModule,
     MatChipsModule,
     MatButtonModule,
+    MatDividerModule,
     MatToolbarModule
   ],
   providers: [],
