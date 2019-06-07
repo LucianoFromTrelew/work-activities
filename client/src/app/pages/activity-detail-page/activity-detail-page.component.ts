@@ -51,7 +51,10 @@ export class ActivityDetailPageComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  onEditClick() {}
+  onEditClick() {
+    const url = `/activity/${this.activity.id}/edit`;
+    this.router.navigate([url]);
+  }
 
   async onDeleteClick() {
     try {
