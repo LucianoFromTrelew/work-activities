@@ -3,10 +3,12 @@ import { Routes, RouterModule } from "@angular/router";
 import { ActivityListPageComponent } from "./pages/activity-list-page/activity-list-page.component";
 import { ActivityDetailPageComponent } from "./pages/activity-detail-page/activity-detail-page.component";
 import { LoginPageComponent } from "./pages/login-page/login-page.component";
+import { ActivityCreatePageComponent } from "./pages/activity-create-page/activity-create-page.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/activity", pathMatch: "full" },
   { path: "activity", component: ActivityListPageComponent },
+  { path: "activity/create", component: ActivityCreatePageComponent },
   { path: "activity/:activityId", component: ActivityDetailPageComponent },
   { path: "login", component: LoginPageComponent },
   { path: "**", redirectTo: "/activity" }

@@ -15,10 +15,18 @@ export class AppComponent implements OnInit {
     this.authService.getAuthStatus().subscribe(value => {
       this.isLoggedIn = value;
     });
-    await this.authService.checkIsLoggedIn().toPromise();
+    try {
+      await this.authService.checkIsLoggedIn().toPromise();
+    } catch (error) {
+      console.error("pinchose ngOnInit");
+    }
   }
 
   async onLogout() {
-    await this.authService.logout().toPromise();
+    try {
+      await this.authService.logout().toPromise();
+    } catch (error) {
+      console.error("pinchose onLogout");
+    }
   }
 }

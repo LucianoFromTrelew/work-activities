@@ -25,6 +25,7 @@ import { ActivityCardComponent } from "./components/activity-card/activity-card.
 import { ActivityListComponent } from "./components/activity-list/activity-list.component";
 import { LoginPageComponent } from "./pages/login-page/login-page.component";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { ActivityCreatePageComponent } from './pages/activity-create-page/activity-create-page.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
     ActivityDetailPageComponent,
     ActivityCardComponent,
     ActivityListComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    ActivityCreatePageComponent
   ],
   imports: [
     BrowserModule,
