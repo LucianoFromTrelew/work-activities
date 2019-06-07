@@ -22,7 +22,7 @@ export class LoginPageComponent implements OnInit {
   ) {}
 
   async onSubmit() {
-    if (this.isFormValid()) return;
+    if (this.isFormInvalid()) return;
     this.submitted = true;
     try {
       const res = await this.authService
@@ -48,7 +48,7 @@ export class LoginPageComponent implements OnInit {
     return this.password.hasError("required") ? "Ingrese su contraseña" : "";
   }
 
-  isFormValid() {
+  isFormInvalid() {
     return this.username.invalid || this.password.invalid;
   }
 
