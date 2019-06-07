@@ -1,4 +1,4 @@
-<div fxLayout="row wrap" fxLayoutAlign="space-evenly">
+<div *ngIf="activities.length" fxLayout="row wrap" fxLayoutAlign="space-evenly">
   <app-activity-card
     #activityCard
     class="activity-card"
@@ -6,4 +6,12 @@
     [activity]="activity"
     (selected)="onSelectedActivity($event)"
   ></app-activity-card>
+</div>
+
+<div
+  *ngIf="!activities.length"
+  fxLayout="row wrap"
+  fxLayoutAlign="space-evenly"
+>
+  <h1>No hay actividades registradas</h1>
 </div>

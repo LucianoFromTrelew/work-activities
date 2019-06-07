@@ -4,8 +4,7 @@ import {
   Input,
   Output,
   EventEmitter,
-  ViewChildren,
-  AfterContentChecked
+  ViewChildren
 } from "@angular/core";
 import { Activity } from "../../models/activity";
 
