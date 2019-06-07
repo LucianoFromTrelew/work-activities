@@ -14,8 +14,7 @@ describe("ActivitiesService", () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [ActivitiesService]
+      imports: [HttpClientTestingModule]
     });
 
     service = TestBed.get(ActivitiesService);
@@ -35,9 +34,7 @@ describe("ActivitiesService", () => {
       expect(activities).toBe(expectedData);
     });
 
-    const requestWrapper = httpMock.expectOne(
-      "http://localhost:5000/api/activity"
-    );
+    const requestWrapper = httpMock.expectOne(service.getUrl());
 
     expect(requestWrapper.request.method).toBe("GET");
 
@@ -51,9 +48,7 @@ describe("ActivitiesService", () => {
       expect(activity).toEqual(expectedData[0]);
     });
 
-    const requestWrapper = httpMock.expectOne(
-      `http://localhost:5000/api/activity/${id}`
-    );
+    const requestWrapper = httpMock.expectOne(service.getUrl(id));
 
     expect(requestWrapper.request.method).toBe("GET");
 
