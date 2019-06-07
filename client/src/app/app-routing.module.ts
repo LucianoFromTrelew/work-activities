@@ -5,13 +5,22 @@ import { ActivityDetailPageComponent } from "./pages/activity-detail-page/activi
 import { LoginPageComponent } from "./pages/login-page/login-page.component";
 import { ActivityCreatePageComponent } from "./pages/activity-create-page/activity-create-page.component";
 import { ActivityEditPageComponent } from "./pages/activity-edit-page/activity-edit-page.component";
+import { AuthGuard } from "./guards/auth.guard";
 
 const routes: Routes = [
   { path: "", redirectTo: "/activity", pathMatch: "full" },
   { path: "activity", component: ActivityListPageComponent },
-  { path: "activity/create", component: ActivityCreatePageComponent },
+  {
+    path: "activity/create",
+    component: ActivityCreatePageComponent,
+    canActivate: [AuthGuard]
+  },
   { path: "activity/:activityId", component: ActivityDetailPageComponent },
-  { path: "activity/:activityId/edit", component: ActivityEditPageComponent },
+  {
+    path: "activity/:activityId/edit",
+    component: ActivityEditPageComponent,
+    canActivate: [AuthGuard]
+  },
   { path: "login", component: LoginPageComponent },
   { path: "**", redirectTo: "/activity" }
 ];
