@@ -1,3 +1,41 @@
-<p>
-  login-page works!
-</p>
+<div fxLayout="column" fxLayoutAlign="center center">
+  <h1 *ngIf="!submitted">Ingrese sus credenciales</h1>
+  <mat-spinner *ngIf="submitted"></mat-spinner>
+
+  <mat-card fxLayout="column" fxLayoutAlign="space-evenly">
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Nombre de usuario"
+        [formControl]="username"
+        required
+      />
+      <mat-error *ngIf="username.invalid">{{
+        getUsernameErrorMessage()
+      }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Contraseña"
+        [formControl]="password"
+        required
+      />
+      <mat-error *ngIf="password.invalid">{{
+        getPasswordErrorMessage()
+      }}</mat-error>
+    </mat-form-field>
+
+    <div fxLayout="row" fxLayoutAlign="end">
+      <button
+        mat-raised-button
+        (click)="onSubmit()"
+        color="primary"
+        [disabled]="isFormValid()"
+      >
+        Enviar
+      </button>
+    </div>
+  </mat-card>
+</div>

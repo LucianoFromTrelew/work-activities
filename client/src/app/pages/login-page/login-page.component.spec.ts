@@ -1,16 +1,38 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { LoginPageComponent } from './login-page.component';
+import { LoginPageComponent } from "./login-page.component";
+import { ReactiveFormsModule } from "@angular/forms";
+import {
+  MatProgressSpinnerModule,
+  MatFormFieldModule,
+  MatCardModule,
+  MatInputModule,
+  MatSnackBarModule
+} from "@angular/material";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { RouterTestingModule } from "@angular/router/testing";
+import { AlertService } from "src/app/alert.service";
 
-describe('LoginPageComponent', () => {
+describe("LoginPageComponent", () => {
   let component: LoginPageComponent;
   let fixture: ComponentFixture<LoginPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoginPageComponent ]
-    })
-    .compileComponents();
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        MatProgressSpinnerModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSnackBarModule,
+        MatCardModule
+      ],
+      declarations: [LoginPageComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +41,7 @@ describe('LoginPageComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
