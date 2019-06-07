@@ -48,4 +48,8 @@ export class ActivityListPageComponent implements OnInit, OnDestroy {
   onSelectedActivity(activity: Activity) {
     this.router.navigate(["/activity", activity.id]);
   }
+
+  onClickCreateActivity() {
+    this.router.navigate(["/activity/create"]);
+  }
 }
