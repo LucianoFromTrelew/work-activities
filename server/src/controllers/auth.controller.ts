@@ -23,12 +23,10 @@ const logout = async (
   next: NextFunction
 ) => {
   try {
-    const { authorization } = request.headers;
-    const apiToken = authorization.split(" ")[1];
-    const user = await User.findOne({ apiToken });
+    const user = request.user;
     user.clearApiToken();
     await user.save();
-    response.status(200).send();
+    response.status(200).send({ msg: "Operación realizada con éxito" });
   } catch (err) {
     response.status(400).send({ msg: "Datos incorrectos" });
   }

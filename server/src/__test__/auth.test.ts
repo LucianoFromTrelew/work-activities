@@ -107,6 +107,10 @@ describe("auth", () => {
         .post("/auth/logout")
         .set("Authorization", user.getAuthHeader());
       expect(response.status).toBe(200);
+      expect(response.body).toHaveProperty(
+        "msg",
+        "Operación realizada con éxito"
+      );
     });
 
     it("returns 400 if user not logged in", async () => {
@@ -115,7 +119,7 @@ describe("auth", () => {
       const response = await request(app)
         .post("/auth/logout")
         .set("Authorization", user.getAuthHeader());
-      expect(response.status).toBe(400);
+      expect(response.status).toBe(401);
     });
   });
 

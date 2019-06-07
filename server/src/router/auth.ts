@@ -10,7 +10,11 @@ import passport from "../config/passport";
 const router = Router();
 
 router.post("/login", login);
-router.post("/logout", logout);
+router.post(
+  "/logout",
+  passport.authenticate("bearer", { session: false }),
+  logout
+);
 router.get(
   "/isauthenticated",
   passport.authenticate("bearer", { session: false }),
