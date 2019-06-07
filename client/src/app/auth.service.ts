@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable, of } from "rxjs";
+import { Observable, of, Subject } from "rxjs";
 import { tap, catchError, finalize } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 
@@ -9,6 +9,7 @@ import { environment } from "src/environments/environment";
 })
 export class AuthService {
   constructor(private http: HttpClient) {}
+  private _authStatus: Subject<boolean> = new Subject<boolean>();
 
   private getLocalStorageKey(): string {
     return "work-activities-api-token";
@@ -31,17 +32,23 @@ export class AuthService {
     localStorage.removeItem(this.getLocalStorageKey());
   }
 
+  getAuthStatus(): Subject<boolean> {
+    return this._authStatus;
+  }
+
   login(username: string, password: string): Observable<Object> {
     return this.http.post(this.getUrl("login"), { username, password }).pipe(
       tap(
         (response: any): Observable<Object> => {
           const { apiToken } = response;
           localStorage.setItem(this.getLocalStorageKey(), apiToken);
+          this._authStatus.next(true);
           return response;
         }
       ),
       catchError(err => {
         this.removeApiToken();
+        this._authStatus.next(false);
         throw new Error(err);
       })
     );
@@ -62,6 +69,7 @@ export class AuthService {
         finalize(
           (): Observable<Object> => {
             this.removeApiToken();
+            this._authStatus.next(false);
             return of();
           }
         )
@@ -74,8 +82,12 @@ export class AuthService {
         headers: { Authorization: this.getAuthHeader() }
       })
       .pipe(
+        tap(res => {
+          this._authStatus.next(true);
+        }),
         catchError((err: any) => {
           this.removeApiToken();
+          this._authStatus.next(false);
           throw new Error(err);
         })
       );
