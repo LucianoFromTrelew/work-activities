@@ -1,16 +1,32 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ActivityDetailPageComponent } from './activity-detail-page.component';
+import { ActivityDetailPageComponent } from "./activity-detail-page.component";
+import { ActivatedRoute } from "@angular/router";
+import { of } from "rxjs";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import {
+  MatProgressSpinnerModule,
+  MatCardModule,
+  MatDividerModule,
+  MatChipsModule
+} from "@angular/material";
 
-describe('ActivityDetailPageComponent', () => {
+describe("ActivityDetailPageComponent", () => {
   let component: ActivityDetailPageComponent;
   let fixture: ComponentFixture<ActivityDetailPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ActivityDetailPageComponent ]
-    })
-    .compileComponents();
+      declarations: [ActivityDetailPageComponent],
+      imports: [
+        HttpClientTestingModule,
+        MatProgressSpinnerModule,
+        MatCardModule,
+        MatDividerModule,
+        MatChipsModule
+      ],
+      providers: [{ provide: ActivatedRoute, useValue: of({ id: 123 }) }]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +35,7 @@ describe('ActivityDetailPageComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
