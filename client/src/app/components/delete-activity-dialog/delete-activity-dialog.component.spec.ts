@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { DeleteActivityDialogComponent } from "./delete-activity-dialog.component";
-import { MatDialogModule } from "@angular/material";
+import { MatDialogModule, MatDialogRef } from "@angular/material";
 
 describe("DeleteActivityDialogComponent", () => {
   let component: DeleteActivityDialogComponent;
@@ -10,7 +10,8 @@ describe("DeleteActivityDialogComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [MatDialogModule],
-      declarations: [DeleteActivityDialogComponent]
+      declarations: [DeleteActivityDialogComponent],
+      providers: [{ provide: MatDialogRef, useValue: {} }]
     }).compileComponents();
   }));
 

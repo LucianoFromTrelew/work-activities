@@ -8,7 +8,9 @@ import {
   MatProgressSpinnerModule,
   MatCardModule,
   MatDividerModule,
-  MatChipsModule
+  MatChipsModule,
+  MatDialogModule,
+  MatSnackBarModule
 } from "@angular/material";
 import { RouterTestingModule } from "@angular/router/testing";
 
@@ -25,6 +27,8 @@ describe("ActivityDetailPageComponent", () => {
         MatProgressSpinnerModule,
         MatCardModule,
         MatDividerModule,
+        MatDialogModule,
+        MatSnackBarModule,
         MatChipsModule
       ],
       providers: [{ provide: ActivatedRoute, useValue: of({ id: 123 }) }]
