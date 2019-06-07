@@ -1,3 +1,96 @@
-<p>
-  activity-create-page works!
-</p>
+<div fxLayout="column" fxLayoutAlign="center center">
+  <h1 *ngIf="!submitted">Crear nueva actividad</h1>
+  <mat-spinner *ngIf="submitted"></mat-spinner>
+
+  <mat-card class="container">
+    <form
+      [formGroup]="activityForm"
+      (ngSubmit)="onSubmit()"
+      fxLayout="column"
+      fxLayoutAlign="space-evenly"
+    >
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Título de la actividad"
+          type="text"
+          formControlName="title"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Descripción de la actividad"
+          type="text"
+          formControlName="description"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <div fxLayout="row" fxLayoutAlign="start">
+          <input
+            matInput
+            placeholder="Etiqueta de la actividad"
+            type="text"
+            formControlName="newTag"
+          />
+          <button type="button" mat-raised-button (click)="onAddTag()">
+            Agregar
+          </button>
+        </div>
+      </mat-form-field>
+
+      <div formArrayName="tags">
+        <ul>
+          <li
+            *ngFor="
+              let item of activityForm.controls.tags.controls;
+              let i = index
+            "
+          >
+            <div fxLayout="row" class="tag-item">
+              <input matInput readonly type="text" [formControlName]="i" />
+              <button mat-mini-fab color="warn" (click)="onDeleteTag(i)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <span class="mat-title">Geolocalización</span>
+      <div
+        formGroupName="geolocation"
+        fxLayout="row wrap"
+        fxLayoutAlign="space-evenly"
+      >
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            placeholder="Latitud"
+            formControlName="latitude"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            placeholder="Longitud"
+            formControlName="longitude"
+          />
+        </mat-form-field>
+      </div>
+
+      <button
+        type="submit"
+        mat-raised-button
+        color="accent"
+        [disabled]="isFormInvalid()"
+      >
+        Enviar
+      </button>
+    </form>
+  </mat-card>
+</div>
