@@ -10,6 +10,7 @@ import {
   MatDividerModule,
   MatChipsModule
 } from "@angular/material";
+import { RouterTestingModule } from "@angular/router/testing";
 
 describe("ActivityDetailPageComponent", () => {
   let component: ActivityDetailPageComponent;
@@ -20,6 +21,7 @@ describe("ActivityDetailPageComponent", () => {
       declarations: [ActivityDetailPageComponent],
       imports: [
         HttpClientTestingModule,
+        RouterTestingModule,
         MatProgressSpinnerModule,
         MatCardModule,
         MatDividerModule,

@@ -13,7 +13,8 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatSnackBarModule,
-  MatIconModule
+  MatIconModule,
+  MatDialogModule
 } from "@angular/material";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -27,6 +28,7 @@ import { ActivityListComponent } from "./components/activity-list/activity-list.
 import { LoginPageComponent } from "./pages/login-page/login-page.component";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { ActivityCreatePageComponent } from "./pages/activity-create-page/activity-create-page.component";
+import { DeleteActivityDialogComponent } from "./components/delete-activity-dialog/delete-activity-dialog.component";
 
 @NgModule({
   declarations: [
@@ -37,8 +39,10 @@ import { ActivityCreatePageComponent } from "./pages/activity-create-page/activi
     ActivityCardComponent,
     ActivityListComponent,
     LoginPageComponent,
-    ActivityCreatePageComponent
+    ActivityCreatePageComponent,
+    DeleteActivityDialogComponent
   ],
+  entryComponents: [DeleteActivityDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -56,6 +60,7 @@ import { ActivityCreatePageComponent } from "./pages/activity-create-page/activi
     MatInputModule,
     MatSnackBarModule,
     MatIconModule,
+    MatDialogModule,
     MatToolbarModule
   ],
   providers: [],

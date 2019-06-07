@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Eliminar actividad</h1>
+<div mat-dialog-content>
+  <p>¿Está seguro que desea eliminar esta actividad?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancelar</button>
+  <button color="warn" mat-button cdkFocusInitial (click)="onDeleteClick()">
+    Eliminar
+  </button>
+</div>

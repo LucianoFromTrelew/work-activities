@@ -3,7 +3,7 @@
 </div>
 
 <div *ngIf="error" fxLayout="row" fxLayoutAlign="center">
-  <h1>Ha ocurrido un error, intente de nuevo más tarde</h1>
+  <h1>No se pudo recuperar la actividad deseada</h1>
 </div>
 
 <div *ngIf="!error && !isLoading" class="wrapper">
@@ -22,12 +22,24 @@
   </mat-card>
   <mat-divider></mat-divider>
   <mat-card>
-    <p *ngIf="activity?.geolocation">
-      {{ activity?.geolocation?.latitude }}
-      {{ activity?.geolocation?.longitude }}
-    </p>
+    <div *ngIf="activity?.geolocation">
+      <span class="mat-title">Geolocalización</span>
+      <ul>
+        <li>Latitud: {{ activity?.geolocation?.latitude }}</li>
+        <li>Longitud: {{ activity?.geolocation?.longitude }}</li>
+      </ul>
+    </div>
     <p *ngIf="!activity?.geolocation">
       La actividad no cuenta con geolocalización
     </p>
   </mat-card>
+
+  <div fxLayout="row" fxLayoutAlign="end" class="actions">
+    <button mat-raised-button color="info" (click)="onEditClick()">
+      Editar
+    </button>
+    <button mat-raised-button color="warn" (click)="onDeleteClick()">
+      Eliminar
+    </button>
+  </div>
 </div>
