@@ -16,9 +16,12 @@
   >
   <mat-divider></mat-divider>
   <mat-card>
-    <mat-chip-list>
+    <mat-chip-list *ngIf="activity?.tags?.length">
       <mat-chip *ngFor="let tag of activity?.tags">{{ tag }}</mat-chip>
     </mat-chip-list>
+    <p *ngIf="!activity?.tags?.length">
+      La actividad no cuenta con etiquetas
+    </p>
   </mat-card>
   <mat-divider></mat-divider>
   <mat-card>
@@ -34,7 +37,7 @@
     </p>
   </mat-card>
 
-  <div fxLayout="row" fxLayoutAlign="end" class="actions">
+  <div *ngIf="isLoggedIn" fxLayout="row" fxLayoutAlign="end" class="actions">
     <button mat-raised-button color="info" (click)="onEditClick()">
       Editar
     </button>
