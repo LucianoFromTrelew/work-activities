@@ -52,6 +52,7 @@ export class ActivityCreatePageComponent implements OnInit {
     if (existingTag) return;
 
     tags.push(new FormControl(tag));
+    (this.activityForm.get("newTag") as FormControl).reset();
   }
 
   onDeleteTag(index) {
