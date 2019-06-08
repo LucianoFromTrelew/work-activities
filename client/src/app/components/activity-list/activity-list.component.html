@@ -1,17 +1,19 @@
-<div *ngIf="activities.length" fxLayout="row wrap" fxLayoutAlign="space-evenly">
-  <app-activity-card
-    #activityCard
-    class="activity-card"
-    *ngFor="let activity of activities"
-    [activity]="activity"
-    (selected)="onSelectedActivity($event)"
-  ></app-activity-card>
-</div>
+<div class="container" fxLayout="column" fxLayoutAlign="center center">
+  <div
+    *ngIf="activities.length"
+    fxLayout="row wrap"
+    fxLayoutAlign="space-evenly"
+  >
+    <app-activity-card
+      #activityCard
+      class="activity-card"
+      *ngFor="let activity of activities"
+      [activity]="activity"
+      (selected)="onSelectedActivity($event)"
+    ></app-activity-card>
+  </div>
 
-<div
-  *ngIf="!activities.length"
-  fxLayout="row wrap"
-  fxLayoutAlign="space-evenly"
->
-  <h1>No hay actividades registradas</h1>
+  <div *ngIf="!activities.length">
+    <h1>No hay actividades registradas</h1>
+  </div>
 </div>
